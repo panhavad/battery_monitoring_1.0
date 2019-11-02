@@ -128,23 +128,21 @@ void loop() {
       for (int i = 5; i < sampleLoad - 5; i++) {
         avgValue+=buffer[i]; //sum each buffer value together
       }
+      analog_value_origin[i_pin]=(float)avgValue/(sampleLoad - 10); //find the average result
     }
-
-    analog_value_origin[i_pin]=(float)avgValue/(sampleLoad - 10); //find the average result
-  }
   
-  //isolate the the massurement value from series connection & and refine the value
-  if (i == 0) {//if one first battery value
-    analog_value_calculated[i] = analog_value_origin[i]; //value dont change
-  }else if (i == 3) {//if the one last battery value
-    analog_value_calculated[i] = analog_value_origin[i] - analog_value_origin[i - 1] - 20; //throught out the whole massurement there are at most 20 raw value extra
-  }else {
-    analog_value_calculated[i] = analog_value_origin[i] - analog_value_origin[i - 1]; //isolate the massurement value for only one spacific battery
+    //isolate the the massurement value from series connection & and refine the value
+    if (i == 0) {//if one first battery value
+      analog_value_calculated[i] = analog_value_origin[i]; //value dont change
+    }else if (i == 3) {//if the one last battery value
+      analog_value_calculated[i] = analog_value_origin[i] - analog_value_origin[i - 1] - 20; //throught out the whole massurement there are at most 20 raw value extra
+    }else {
+      analog_value_calculated[i] = analog_value_origin[i] - analog_value_origin[i - 1]; //isolate the massurement value for only one spacific battery
+    }
+    //ensure the final value is not exit what we expect
+    analog_value_calculated[i] >= 239 ? analog_value_calculated[i] = 239 : analog_value_calculated[i] = analog_value_calculated[i]; //if the value exit 240 analog value
+    analog_value_calculated[i] <= 0 ? analog_value_calculated[i] = 0 : analog_value_calculated[i] = analog_value_calculated[i]; //if the value lower them 0 analog value
   }
-  //ensure the final value is not exit what we expect
-  analog_value_calculated[i] >= 239 ? analog_value_calculated[i] = 239 : analog_value_calculated[i] = analog_value_calculated[i]; //if the value exit 240 analog value
-  analog_value_calculated[i] <= 0 ? analog_value_calculated[i] = 0 : analog_value_calculated[i] = analog_value_calculated[i]; //if the value lower them 0 analog value
-  
   //sample processing timer
   if (millis() - samplingTime > samplingInterval) {
     
