@@ -41,7 +41,7 @@ int start_indicator = 1; //indicator that said the board is just start power on
 
 //BLYNK server configuration
 // char auth[] = "dNLW3Q96qY_M4Em16CHrQiU6Sz0S4lAA"; //BLYNK project token
-IPAddress server_ip (10, 254, 253, 248); //BLYNK server IP
+IPAddress server_ip (192, 168, 7, 100); //BLYNK server IP
 
 //arduino ethernet confirguration (network)
 byte arduino_mac[] = { 0xDE, 0xED, 0xBA, 0xFE, 0xFE, 0xED }; // MAC address should be different for each device in your LAN
@@ -61,7 +61,7 @@ void setup() {
   Serial.begin(9600); //enable serial mode on bitrate at 9600
 
   //some conflict in BLYNK configuration so have to place raw token string here
-  Blynk.begin("dNLW3Q96qY_M4Em16CHrQiU6Sz0S4lAA", server_ip, 8080, arduino_ip, dns_ip, gateway_ip, subnet_mask, arduino_mac); //establish connection to BLYNK server
+  Blynk.begin("lWoWHfQ-jUH0byk8DzUCwbeDhay-OCp2", server_ip, 8080, arduino_ip, dns_ip, gateway_ip, subnet_mask, arduino_mac); //establish connection to BLYNK server
 
 }
 
