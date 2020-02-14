@@ -41,7 +41,7 @@ int start_indicator = 1; //indicator that said the board is just start power on
 
 //BLYNK server configuration
 // char auth[] = "dNLW3Q96qY_M4Em16CHrQiU6Sz0S4lAA"; //BLYNK project token
-IPAddress server_ip (192, 168, 7, 100); //BLYNK server IP
+IPAddress server_ip (10, 254, 253, 13); //BLYNK server IP
 
 //arduino ethernet confirguration (network)
 byte arduino_mac[] = { 0xDE, 0xED, 0xBA, 0xFE, 0xFE, 0xED }; // MAC address should be different for each device in your LAN
